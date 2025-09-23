@@ -6,13 +6,15 @@ import PostDetail from "./pages/PostDetail";
 
 export default function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/post/:id" element={<PostDetail />} />
-      </Routes>
-    </Router>
+    <div className="font-sans">
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/post/:id" element={<PostDetail />} />
+        </Routes>
+      </Router>
+    </div>
   );
 }
