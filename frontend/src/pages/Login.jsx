@@ -1,8 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  useEffect(() => {
+    const user = localStorage.getItem('user');
+    if (user) {
+      window.location.href = '/';
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,8 +24,11 @@ export default function Login() {
       });
 
       if (response.ok) {
-        console.log('Connexion réussie');
-        // ...autres actions (redirection, stockage, etc.)
+        const data = await response.json();
+        // Stocke le user dans le localStorage
+        localStorage.setItem('user', JSON.stringify(data.user || data));
+        // Redirige vers la Home
+        window.location.href = '/';
       } else {
         console.log('Échec de la connexion');
       }
