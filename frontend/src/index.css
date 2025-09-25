@@ -3,65 +3,142 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 :root {
   line-height: 1.5;
   font-weight: 400;
-
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Reset pour Ã©viter les conflits avec le composant */
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  place-items: center;
+  padding: 0;
   min-width: 320px;
   min-height: 100vh;
   font-family: 'Hack', system-ui, Avenir, Helvetica, Arial, sans-serif;
-
   color-scheme: light dark;
-  color:  #00FF00;
-  background-color: #242424;
-
+  color: #00FF00;
+  background-color: #000000; /* Noir pur au lieu de #242424 */
 }
 
-h1 {
+/* Styles spÃ©cifiques pour les Ã©lÃ©ments qui ne sont PAS dans PostDetail */
+body:not(.post-detail-page) h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
 
-button {
+/* Styles pour les boutons gÃ©nÃ©riques (pas ceux de PostDetail) */
+body:not(.post-detail-page) button {
   border: 1px solid transparent;
   padding: 0.2em 0.2em;
   margin: 1rem;
   font-size: 1em;
   font-weight: 500;
-  color:  #00FF00;
+  color: #00FF00;
   font-family: 'Hack', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  background-color: transparent;
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
-  border-bottom: #00FF00;
+
+body:not(.post-detail-page) button:hover {
+  border-bottom: 1px solid #00FF00;
 }
-button:focus,
-button:focus-visible {
+
+body:not(.post-detail-page) button:focus,
+body:not(.post-detail-page) button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* Classes spÃ©ciales pour PostDetail */
+.post-detail-container {
+  font-family: 'Hack', monospace;
+  background-color: #000000;
+  color: #00FF00;
+  min-height: 100vh;
+}
+
+.post-detail-container button {
+  margin: 0 !important;
+  font-family: 'Hack', monospace !important;
+}
+
+.post-detail-container textarea {
+  font-family: 'Hack', monospace !important;
+  background-color: rgba(0, 0, 0, 0.9) !important;
+  color: #00FF00 !important;
+}
+
+.post-detail-container input {
+  font-family: 'Hack', monospace !important;
+  background-color: rgba(0, 0, 0, 0.9) !important;
+  color: #00FF00 !important;
+}
+
+/* Animations personnalisÃ©es */
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-green {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.3s ease-out;
+}
+
+.animate-pulse-green {
+  animation: pulse-green 2s infinite;
+}
+
+/* Scrollbar personnalisÃ©e */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #00FF00;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #40FF40;
+}
+
+/* Styles pour les Ã©crans clairs (optionnel, peut Ãªtre retirÃ© si pas utilisÃ©) */
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
   }
-  a:hover {
+  body:not(.post-detail-page) a:hover {
     color: #747bff;
   }
-  button {
+  body:not(.post-detail-page) button {
     background-color: #f9f9f9;
   }
 }
