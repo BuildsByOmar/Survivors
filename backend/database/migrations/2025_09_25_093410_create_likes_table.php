@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('post_id');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('post_id')->nullable()->constrained('posts')->onDelete('cascade');
+            $table->foreignId('comment_id')->nullable()->constrained('comments')->onDelete('cascade');
+            $table->boolean('is_like')->default(true); // true = like, false = dislike
             $table->timestamps();
+            $table->unique(['user_id', 'post_id', 'comment_id']);
         });
     }
 
